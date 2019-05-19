@@ -1,117 +1,147 @@
 package com.ogic;
 
 public class Solution {
+
     static int[] ti = new int[20];
 
-    public int S(int x) {
-        return x + 1;
+    public int S(int x){
+        return x+1;
     }
 
-    public int N(int x) {
+    public int N(int x){
         return 0;
     }
 
-    public int add(int x, int y) {
-        return x + y;
+    public int add(int x, int y){
+        return x+y;
     }
 
-    public int mul(int x, int y) {
-        return x * y;
+    public int mul(int x, int y){
+        return x*y;
     }
 
-    public int fac(int x) {
-        if (x < 0) {
+    public int fac(int x){
+        if (x < 0){
             return -1;
         }
 
-        if (x == 0) {
+        if (x == 0){
             return 1;
         }
 
-        return mul(x, fac(x - 1));
+        return mul(x, fac(x-1));
     }
 
-    public int exp(int x, int y) {
-        if (y < 0) {
+    public int exp(int x, int y){
+        if (y < 0){
             return -1;
         }
 
-        if (y == 0) {
+        if (y == 0){
             return x;
         }
 
-        return mul(x, exp(x, y - 1));
+        return mul(x, exp(x, y-1));
     }
 
-    public int P(int x) {
-        if (x > 0) {
-            return x - 1;
+    public int P(int x){
+        if (x > 0){
+            return x-1;
         }
         return 0;
     }
 
-    public int sub(int x, int y) {
-        if (x > y) {
-            return x - y;
+    public int sub(int x, int y){
+        if (x > y){
+            return x-y;
         }
         return 0;
     }
 
-    public int abs(int x, int y) {
-        return sub(x, y) + sub(y, x);
+    //9
+    public int f(int x){
+        return 0;
+    }
+    public int ff(int x, int y){
+        if (y == 0){
+            return f(x);
+        }else {
+            return f(x)+ff(x,y-1);
+        }
+    }
+    public int digui(int x, int y){
+        if (y == 0){
+            return ff(x,y);
+        }else {
+            return ff(x,y) + digui(x, y-1);
+        }
     }
 
-    public int a(int x) {
-        if (x == 0) {
+    //10
+    public int digui10(int x, int y){
+        if (y == 0){
+            return ff(x, y);
+        }else {
+            return mul(digui10(x, y-1),ff(x, y));
+        }
+    }
+
+    //11
+    public int abs(int x, int y){
+        return sub(x,y) + sub(y,x);
+    }
+
+    public int a(int x){
+        if (x == 0){
             return 1;
         }
         return 0;
     }
 
-    public int d(int x, int y) {
-        return a(a(abs(x, y)));
+    public int d(int x, int y){
+        return a(a(abs(x,y)));
     }
 
-    public boolean equal(int x, int y) {
-        if (d(x, y) == 0) {
+    public boolean equal(int x, int y){
+        if (d(x,y) == 0){
             return true;
         }
         return false;
     }
 
-    public boolean greaterThan(int x, int y) {
-        if (a(sub(x, y)) == 0) {
+    public boolean greaterThan(int x, int y){
+        if (a(sub(x, y)) == 0){
             return true;
         }
         return false;
     }
 
-    public boolean notGreaterThan(int x, int y) {
-        return !greaterThan(x, y);
+    public boolean notGreaterThan(int x, int y){
+        return !greaterThan(x,y);
     }
 
-    public boolean isXExactDivisionByY(int x, int y) {
-        for (int i = 0; i <= x; i++) {
-            if (mul(i, y) == x) {
+    public boolean isXExactDivisionByY(int x, int y){
+        for (int i = 0; i <= x; i++){
+            if (mul(i, y) == x){
                 return true;
             }
         }
         return false;
     }
 
-    public int exactDivisionYByX(int x, int y) {
-        for (int i = 0; i <= x; i++) {
-            if (mul(x, i + 1) > y) {
+    public int exactDivisionYByX(int x, int y){
+        for (int i = 0; i <= x; i++){
+            if (mul(x, i+1) > y){
                 return i;
             }
         }
         return 0;
     }
 
-    public boolean isPrime(int x) {
+    public boolean isPrime(int x){
         if (x > 1) {
             for (int i = 2; i < x; i++) {
-                if (isXExactDivisionByY(x, i)) {
+                if (isXExactDivisionByY(x, i)){
                     return false;
                 }
             }
@@ -120,17 +150,17 @@ public class Solution {
         return false;
     }
 
-    public int getPrimeByIndex(int index) {
-        if (index < 0) {
+    public int getPrimeByIndex(int index){
+        if (index < 0){
             return -1;
         }
-        if (index == 0) {
+        if (index == 0){
             return 0;
         }
         int primeNum = 2;
         int primeLen = 0;
-        while (primeLen < index) {
-            if (isPrime(primeNum)) {
+        while (primeLen < index){
+            if (isPrime(primeNum)){
                 primeLen++;
             }
             primeNum++;
@@ -138,9 +168,10 @@ public class Solution {
         return primeNum;
     }
 
-    public int R(int x, int y) {
+    public int R(int x, int y){
         return mul(sub(x, y), exactDivisionYByX(y, x));
     }
+
 
     //20
     public int t(int x) {
@@ -276,7 +307,6 @@ public class Solution {
                 break;
             }
         }
-
         return n-y;
     }
 
